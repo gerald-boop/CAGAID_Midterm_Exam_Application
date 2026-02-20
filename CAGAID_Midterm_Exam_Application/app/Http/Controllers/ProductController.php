@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    // Array of products grouped by theme
     private $products = [
         'movies' => [
             [
@@ -30,10 +29,6 @@ class ProductController extends Controller
         ],
     ];
 
-    /**
-     * Retrieve products based on selected theme.
-     * For now, this returns raw data (will be displayed in a Blade view in the next commit).
-     */
     public function showByTheme(string $theme = 'movies')
     {
         if (!array_key_exists($theme, $this->products)) {
@@ -42,8 +37,7 @@ class ProductController extends Controller
 
         $products = $this->products[$theme];
 
-        // Temporary simple response; view will be added in next commit
-        return response()->json([
+        return view('products', [
             'theme'    => $theme,
             'products' => $products,
         ]);
